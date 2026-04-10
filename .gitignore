@@ -1,0 +1,16 @@
+*DS_Store*
+.vscode/*
+scenarios/results/simresults/
+scenarios/results/results_HPC_FR_paper/
+omnetpp-5.6.2/
+.cmdenv-log
+.qtenvrc
+*.anf
+*.sca
+*.vec
+*.csv
+*.vci
+*.json
+*.log
+scenarios/results/slurm*
+scenarios/results/Makefile.*
