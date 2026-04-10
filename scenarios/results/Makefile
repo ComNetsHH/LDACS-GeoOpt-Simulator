@@ -15,19 +15,15 @@ GPSR_PROJ := $(WORKSPACE_ROOT)/ldacs_gpsr_routing
 DSPR_PROJ := $(WORKSPACE_ROOT)/ldacs_dijkstra_routing
 GEOOPT_PROJ := $(WORKSPACE_ROOT)/ldacs_geoopt_routing
 
-SCENARIO_INI := ../ch6_scenarioFR_equipage_fraction.ini
-SIM_OUTPUT_BASE := simresults/ch6_scenarioFR/EquipageFraction
+SCENARIO_INI := ../scenarioFR_equipage_fraction.ini
+SIM_OUTPUT_BASE := simresults/scenarioFR/EquipageFraction
 PLOT_COMMUNICATION_RANGE ?= 100
 PLOT_BEACON_INTERVAL ?= 5
 
 SIM_BINARY_GREEDY_RELEASE := $(GREEDY_PROJ)/out/gcc-release/src/ldacs_greedy_k_hop_routing
-SIM_BINARY_GREEDY_DBG := $(GREEDY_PROJ)/out/gcc-debug/src/ldacs_greedy_k_hop_routing_dbg
 SIM_BINARY_GPSR_RELEASE := $(GPSR_PROJ)/out/gcc-release/src/ldacs_gpsr_routing
-SIM_BINARY_GPSR_DBG := $(GPSR_PROJ)/out/gcc-debug/src/ldacs_gpsr_routing_dbg
 SIM_BINARY_DIJKSTRA_RELEASE := $(DSPR_PROJ)/out/gcc-release/src/ldacs_dijkstra_routing
-SIM_BINARY_DIJKSTRA_DBG := $(DSPR_PROJ)/out/gcc-debug/src/ldacs_dijkstra_routing_dbg
 SIM_BINARY_GEOOPT_RELEASE := $(GEOOPT_PROJ)/out/gcc-release/src/ldacs_geoopt_routing
-SIM_BINARY_GEOOPT_DBG := $(GEOOPT_PROJ)/out/gcc-debug/src/ldacs_geoopt_routing_dbg
 
 INCL_GREEDY := -n ../:./:$(INET_PROJ)/src:$(LDACS_ABSTRACT_RADIO_PROJ)/src:$(LDACS_ABSTRACT_TDMA_PROJ)/src:$(GREEDY_PROJ)/src
 INCL_GPSR := -n ../:./:$(INET_PROJ)/src:$(LDACS_ABSTRACT_RADIO_PROJ)/src:$(LDACS_ABSTRACT_TDMA_PROJ)/src:$(GPSR_PROJ)/src
@@ -38,42 +34,6 @@ GREEDY1_CONFIG := greedy-forwarding-1hop
 GPSR_CONFIG := gpsr-forwarding
 DIJKSTRA_CONFIG := dijkstra
 GEOOPT_CONFIG := optimized-greedy
-
-build-debug-greedy:
-	cd $(WORKSPACE_ROOT); \
-	echo -e "\nBuilding LDACS Abstract Radio Component in Debug Mode"; \
-	cd ldacs_abstract_radio/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I. -I../../inet4/src -L../../inet4/src -lINET_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding LDACS Abstract TDMA Component in Debug Mode"; \
-	cd ldacs_abstract_tdma_mac/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../ldacs_abstract_radio/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding Greedy Routing Component in Debug Mode"; \
-	cd ldacs_greedy_k_hop_routing/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I../../ldacs_abstract_radio/src -I../../ldacs_abstract_tdma_mac/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -L../../ldacs_abstract_tdma_mac/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg -lldacs_abstract_tdma_mac_dbg; make -j$(NUM_CPUS) MODE=debug
-
-build-debug-gpsr:
-	cd $(WORKSPACE_ROOT); \
-	echo -e "\nBuilding LDACS Abstract Radio Component in Debug Mode"; \
-	cd ldacs_abstract_radio/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I. -I../../inet4/src -L../../inet4/src -lINET_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding LDACS Abstract TDMA Component in Debug Mode"; \
-	cd ldacs_abstract_tdma_mac/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../ldacs_abstract_radio/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding GPSR Routing Component in Debug Mode"; \
-	cd ldacs_gpsr_routing/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I../../ldacs_abstract_radio/src -I../../ldacs_abstract_tdma_mac/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -L../../ldacs_abstract_tdma_mac/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg -lldacs_abstract_tdma_mac_dbg; make -j$(NUM_CPUS) MODE=debug
-
-build-debug-dijkstra:
-	cd $(WORKSPACE_ROOT); \
-	echo -e "\nBuilding LDACS Abstract Radio Component in Debug Mode"; \
-	cd ldacs_abstract_radio/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I. -I../../inet4/src -L../../inet4/src -lINET_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding LDACS Abstract TDMA Component in Debug Mode"; \
-	cd ldacs_abstract_tdma_mac/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../ldacs_abstract_radio/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding Dijkstra Routing Component in Debug Mode"; \
-	cd ldacs_dijkstra_routing/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I../../ldacs_abstract_radio/src -I../../ldacs_abstract_tdma_mac/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -L../../ldacs_abstract_tdma_mac/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg -lldacs_abstract_tdma_mac_dbg; make -j$(NUM_CPUS) MODE=debug
-
-build-debug-geoopt:
-	cd $(WORKSPACE_ROOT); \
-	echo -e "\nBuilding LDACS Abstract Radio Component in Debug Mode"; \
-	cd ldacs_abstract_radio/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I. -I../../inet4/src -L../../inet4/src -lINET_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding LDACS Abstract TDMA Component in Debug Mode"; \
-	cd ldacs_abstract_tdma_mac/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../ldacs_abstract_radio/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg; make -j$(NUM_CPUS) MODE=debug; cd ../..; \
-	echo -e "\nBuilding GeoOpt Routing Component in Debug Mode"; \
-	cd ldacs_geoopt_routing/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I../../ldacs_abstract_radio/src -I../../ldacs_abstract_tdma_mac/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-debug/src/ -L../../ldacs_abstract_tdma_mac/out/gcc-debug/src/ -lINET_dbg -lldacs_abstract_radio_dbg -lldacs_abstract_tdma_mac_dbg; make -j$(NUM_CPUS) MODE=debug
 
 build-release-greedy:
 	cd $(WORKSPACE_ROOT); \
@@ -111,7 +71,6 @@ build-release-geoopt:
 	echo -e "\nBuilding GeoOpt Routing Component in Release Mode"; \
 	cd ldacs_geoopt_routing/src; opp_makemake -f -s --deep -O out -KINET4_PROJ=../../inet4 -DINET_IMPORT -I../../inet4 -I../../ldacs_abstract_radio/src -I../../ldacs_abstract_tdma_mac/src -I. -I../../inet4/src -L../../inet4/src -L../../ldacs_abstract_radio/out/gcc-release/src/ -L../../ldacs_abstract_tdma_mac/out/gcc-release/src/ -lINET -lldacs_abstract_radio -lldacs_abstract_tdma_mac; make -j$(NUM_CPUS) MODE=release
 
-build-debug: build-debug-greedy build-debug-gpsr build-debug-dijkstra build-debug-geoopt
 build-release: build-release-greedy build-release-gpsr build-release-dijkstra build-release-geoopt
 
 build-release-hpc:
@@ -147,20 +106,6 @@ optimized-greedy-equipageFraction-A2G:
 dijkstra-equipageFraction-A2G:
 	$(MAKE) uncomment-dijkstra; \
 	opp_runall -j$(NUM_CPUS) $(SIM_BINARY_DIJKSTRA_RELEASE) $(SCENARIO_INI) -c $(DIJKSTRA_CONFIG) $(INCL_DIJKSTRA); \
-	$(MAKE) comment-dijkstra
-
-greedy-forwarding-1hop-equipageFraction-A2G-debug:
-	gdbgui --args $(SIM_BINARY_GREEDY_DBG) $(SCENARIO_INI) -u Cmdenv -c $(GREEDY1_CONFIG) $(INCL_GREEDY)
-
-gpsr-forwarding-equipageFraction-A2G-debug:
-	gdbgui --args $(SIM_BINARY_GPSR_DBG) $(SCENARIO_INI) -u Cmdenv -c $(GPSR_CONFIG) $(INCL_GPSR)
-
-optimized-greedy-equipageFraction-A2G-debug:
-	gdbgui --args $(SIM_BINARY_GEOOPT_DBG) $(SCENARIO_INI) -u Cmdenv -c $(GEOOPT_CONFIG) $(INCL_GEOOPT)
-
-dijkstra-equipageFraction-debug:
-	$(MAKE) uncomment-dijkstra; \
-	gdbgui --args $(SIM_BINARY_DIJKSTRA_DBG) $(SCENARIO_INI) -u Cmdenv -c $(DIJKSTRA_CONFIG) $(INCL_DIJKSTRA); \
 	$(MAKE) comment-dijkstra
 
 greedy-forwarding-1hop-equipageFraction-A2G_csv:
