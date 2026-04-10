@@ -2,8 +2,6 @@
 
 # [LDACS-GeoOpt-Simulator](https://github.com/ComNetsHH/LDACS-GeoOpt-Simulator)
 
-# LDACS-GeoOpt-Simulator
-
 ## Copyright and License
 
 This repository is distributed under the GNU Lesser General Public License v3.0 or later.
