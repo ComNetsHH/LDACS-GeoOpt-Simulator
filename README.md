@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19502867.svg)](https://doi.org/10.5281/zenodo.19502867)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19502903.svg)](https://doi.org/10.5281/zenodo.19502903)
 
 # [LDACS-GeoOpt-Simulator](https://github.com/ComNetsHH/LDACS-GeoOpt-Simulator)
 
