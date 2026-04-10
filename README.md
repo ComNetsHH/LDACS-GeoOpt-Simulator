@@ -1,3 +1,7 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19502836.svg)](https://doi.org/10.5281/zenodo.19502836)
+
+# [LDACS-GeoOpt-Simulator](https://github.com/ComNetsHH/LDACS-GeoOpt-Simulator)
+
 # LDACS-GeoOpt-Simulator
 
 ## Copyright and License
@@ -15,10 +19,10 @@ equipage-fraction scenario used for the GeoOpt study.
 
 The included scenario and scripts are prepared to compare:
 
-- Greedy-1
-- GPSR
-- GeoOpt
-- Dijkstra
+- [Greedy-1](https://github.com/ComNetsHH/LDACS-Greedy-K-Hop-Routing)
+- [GPSR](https://github.com/ComNetsHH/LDACS-GPSR-Routing)
+- [GeoOpt](https://github.com/ComNetsHH/LDACS-GeoOpt-Routing)
+- [Dijkstra](https://github.com/ComNetsHH/LDACS-Dijkstra): Implements the Dijkstra's shortest path routing algorithm which serves as a baseline.
 
 ## Repository structure
 
